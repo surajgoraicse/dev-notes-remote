@@ -31,6 +31,23 @@ type EmojiMap = {
 }
 
 let emojimap: EmojiMap | undefined = undefined
+// export async function loadEmoji(code: string) {
+//   if (!emojimap) {
+//     const data = await import("./emojimap.json")
+//     emojimap = data
+//   }
+
+//   const name = emojimap.codePointToName[`${code.toUpperCase()}`]
+//   if (!name) throw new Error(`codepoint ${code} not found in map`)
+
+//   const b64 = emojimap.nameToBase64[name]
+//   if (!b64) throw new Error(`name ${name} not found in map`)
+
+//   return b64
+// }
+
+
+// updated this to work with the new emojimap
 export async function loadEmoji(code: string) {
   if (!emojimap) {
     const data = await import("./emojimap.json")
@@ -38,10 +55,18 @@ export async function loadEmoji(code: string) {
   }
 
   const name = emojimap.codePointToName[`${code.toUpperCase()}`]
-  if (!name) throw new Error(`codepoint ${code} not found in map`)
+
+  if (!name) {
+    console.warn(`⚠️ Unsupported emoji codepoint: ${code}`)
+    return null
+  }
 
   const b64 = emojimap.nameToBase64[name]
-  if (!b64) throw new Error(`name ${name} not found in map`)
+
+  if (!b64) {
+    console.warn(`⚠️ Emoji name missing in map: ${name}`)
+    return null
+  }
 
   return b64
 }
