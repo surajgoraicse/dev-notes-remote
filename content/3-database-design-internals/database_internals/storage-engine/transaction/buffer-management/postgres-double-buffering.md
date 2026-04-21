@@ -18,6 +18,8 @@ Consequently, high-performance systems like MySQL (InnoDB) and distributed store
 Yet, PostgreSQL explicitly violates this principle. It deliberately utilizes a double-buffered architecture, caching data within both its **internal memory space** and the **operating system**'s page cache. This is a calculated engineering trade-off optimizing for ecosystem compatibility, crash recovery simplicity, and kernel-level stability over isolated memory control.
 
 
+![[Pasted image 20260421120136.png]]
+
 ## The Mental Model
 
 To understand why bypassing the kernel is the standard, one must define the standard input/output execution paths in POSIX-compliant operating systems.
