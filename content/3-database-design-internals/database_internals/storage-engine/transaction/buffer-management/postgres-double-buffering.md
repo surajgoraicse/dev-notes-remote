@@ -34,6 +34,18 @@ open("data.bin", O_RDONLY | O_DIRECT);
 
 ![[Pasted image 20260421095754.png]]
 
+
+## Postgres Memory Geometry 
+
+PostgreSQL allocates a fixed block of shared memory upon startup known as **shared_buffers**. When a transaction requests a data block (typically 8KB), the system first searches this internal buffer pool.
+
+If a cache miss occurs, Postgres issues a standard POSIX `read()`. Because it does not use **O_DIRECT**, this read hits the **kernel page cache**. If the Linux kernel has the block cached, it is copied directly into **shared_buffers**. This creates the double-buffering phenomenon: the exact same 8KB data block resides in the kernel's memory space and the database's memory space simultaneously.
+
+Systems that avoid this must handle the immense complexity of Direct I/O.
+
+
+
+
 ## Answering the Why : 
 
 
