@@ -7,8 +7,6 @@ modified: 2026-04-21
 created: 2026-04-21
 ---
 
-
-
-> [!question] Double Buffering: Why PostgreSQL Embraces the Kernel Page Cache While Other Databases Bypass It.
+1. Double Buffering: Why PostgreSQL Embraces the Kernel Page Cache While Other Databases Bypass It. 👉  [[postgres-double-buffering]]
 
 

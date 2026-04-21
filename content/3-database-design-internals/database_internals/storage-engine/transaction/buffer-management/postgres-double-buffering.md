@@ -22,7 +22,7 @@ Yet, PostgreSQL explicitly violates this principle. It deliberately utilizes a d
 
 ## The Mental Model
 
-To understand why bypassing the kernel is the standard, one must define the standard input/output execution paths in POSIX-compliant operating systems.
+First lets define the standard input/output execution paths in POSIX-compliant operating systems.
 
 - **Standard Buffered I/O:** When an application executes standard `read()` or `write()` system calls, the data is not directly transferred to physical storage. The kernel intercepts the operation and buffers the data within the **kernel page cache** (a portion of system RAM managed by the OS). 
 ```c
